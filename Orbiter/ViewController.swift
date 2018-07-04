@@ -12,9 +12,11 @@ class ViewController: UIViewController {
     
     var position : Double = 0
     var velocity : Double = 1
-    var force : Double = 1
     var mass : Double = 1
-    var timeStep : Double = 0.1
+    var timeStep : Double = 0.025
+    var actingMass : Double = 10000
+    var actingPosition : Double = -1
+    var G : Double = 6.674 * pow(10,-11)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +26,7 @@ class ViewController: UIViewController {
         print("initial values")
         print("position \(position)")
         print("velocity \(velocity)")
-        for _ in 1...10 {
+        for _ in 1...100 {
             findNextPosition()
             print("position \(position)")
             print("velocity \(velocity)")
@@ -42,7 +44,15 @@ class ViewController: UIViewController {
         // TODO: Connect with the particle object
         // TODO: Improve to Leapfrog integration
         position = position + velocity*timeStep
-        velocity = velocity + force/mass*timeStep
+        velocity = velocity + calculateGravitationalAcceleration()*timeStep
+    }
+    
+    func calculateGravitationalAcceleration() -> Double {
+        // assuming force on one object from another
+        // F = Gm1m2/r^2
+        let direction : Double = (actingPosition - position) < 0 ? -1 : 1
+        return direction * G * actingMass / pow((actingPosition - position),2)
+        
     }
 
 }
