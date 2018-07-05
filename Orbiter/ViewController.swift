@@ -54,6 +54,8 @@ class ViewController: UIViewController {
         return direction * G * actingMass / pow((actingPosition - position),2)
         
     }
+    
+    
 
 }
 
