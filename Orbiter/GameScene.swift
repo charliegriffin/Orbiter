@@ -99,10 +99,10 @@ class GameScene: SKScene {
         
         //animate the ship when it's slinging
         if(self.slingShot?.isSlinging)! {
-            //change the ship's position & velocity accordingly
-            self.slingShot?.accelerateShip(ship: self.ship!, forTime: dt)
             //change the ship's position accordingly based on its current velocity
             self.ship?.travelLinear(forTime: dt)
+            //change the ship's velocity accordingly
+            self.slingShot?.accelerateShip(ship: self.ship!, forTime: dt)
             
         } else { //animate the ship otherwise
             
