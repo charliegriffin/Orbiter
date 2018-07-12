@@ -100,7 +100,9 @@ class GameScene: SKScene {
         //animate the ship when it's slinging
         if(self.slingShot?.isSlinging)! {
             //change the ship's position & velocity accordingly
-            self.slingShot?.slingShip(ship: self.ship!, forTime: dt)
+            self.slingShot?.accelerateShip(ship: self.ship!, forTime: dt)
+            //change the ship's position accordingly based on its current velocity
+            self.ship?.travelLinear(forTime: dt)
             
         } else { //animate the ship otherwise
             
@@ -122,14 +124,13 @@ class GameScene: SKScene {
 //            for(planet in self.planets) {
 //                planet.gravitateShip(ship: self.ship!, forTime: dt)
 //            }
-            
-            //basic kinematic equations for the ship flying at constant velocity between each frame
-            self.ship?.position.x -= (self.ship?.velocity.dx)! * dt
-            self.ship?.position.y -= (self.ship?.velocity.dy)! * dt
 
+            //change the ship's position accordingly based on its current velocity
+            self.ship?.travelLinear(forTime: dt)
+            
         }
         //change the ship's position accordingly based on its current velocity
-        //self.ship?.travel(forTime: dt)
+        //self.ship?.travelLinear(forTime: dt)
         
         self.previousTime = currentTime
     }

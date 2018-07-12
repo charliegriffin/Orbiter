@@ -85,7 +85,7 @@ public class SlingShot: SKShapeNode {
     }
     
     //sling the ship for the specified amount of time
-    public func slingShip(ship: Ship, forTime dt: CGFloat) {
+    public func accelerateShip(ship: Ship, forTime dt: CGFloat) {
         
         self.isSlinging = true
         //set variables used for motion equations
@@ -106,8 +106,8 @@ public class SlingShot: SKShapeNode {
         //ship.travel(forTime: dt)
         
         //update the ship's position according to the above equation
-        ship.position.x -= p0 * cos(self.theta) - p * cos(self.theta)
-        ship.position.y -= p0 * sin(self.theta) - p * sin(self.theta)
+//        ship.position.x -= p0 * cos(self.theta) - p * cos(self.theta)
+//        ship.position.y -= p0 * sin(self.theta) - p * sin(self.theta)
         
         //update the ship's velocity according to the above equation
         ship.velocity.dx -= v0 * cos(self.theta) - v * cos(self.theta)
