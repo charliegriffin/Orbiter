@@ -95,7 +95,8 @@ class GameScene: SKScene {
             return
         }
         //use previous time for calculating change in time (dt) between each frame (usually ~1/60 seconds)
-        let dt = CGFloat(currentTime - self.previousTime!)
+        let dt : CGFloat = CGFloat(currentTime - self.previousTime!)
+        
         
         //animate the ship when it's slinging (accelerating)
         if(self.slingShot?.isSlinging)! {

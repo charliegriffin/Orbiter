@@ -110,8 +110,8 @@ public class SlingShot: SKShapeNode {
 //        ship.position.y -= p0 * sin(self.theta) - p * sin(self.theta)
         
         //update the ship's velocity according to the above equation
-        ship.velocity.dx -= v0 * cos(self.theta) - v * cos(self.theta)
-        ship.velocity.dy -= v0 * sin(self.theta) - v * sin(self.theta)
+        ship.velocity.dx += v0 * cos(self.theta) - v * cos(self.theta)
+        ship.velocity.dy += v0 * sin(self.theta) - v * sin(self.theta)
         
         //set the slingshot's radius to the new magnitude
         self.radius = p

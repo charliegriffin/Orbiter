@@ -14,6 +14,9 @@ public class Ship: SKShapeNode {
     public var mass: CGFloat
     public var size: CGFloat
     public var velocity : CGVector
+    var actingMass : CGFloat = 10000000000000000
+    var actingPosition : CGFloat = 0
+    var G : CGFloat = 6.674 * pow(10,-11)
     
     //required by Swift for implementation
     public override init() {
@@ -41,8 +44,19 @@ public class Ship: SKShapeNode {
     //it is the ship's responsibility to travel for the specified amount of time
     public func travel(forTime dt: CGFloat) {
         //basic kinematic equations for the ship flying away (or sitting still)
-        self.position.x -= self.velocity.dx * dt
-        self.position.y -= self.velocity.dy * dt
+        self.position.x += self.velocity.dx * dt
+        self.position.y += self.velocity.dy * dt
+        self.velocity.dx += calculateGravitationalAcceleration() * dt
+        print(calculateGravitationalAcceleration())
+//        self.velocity.dy += self.velocity.dx + calculateGravitationalAcceleration() * dt
+//        print("position \(self.position)")
+        print("velocity \(self.velocity)")
+    }
+    
+    func calculateGravitationalAcceleration() -> CGFloat {
+        let direction : CGFloat = (actingPosition - self.position.x) < 0 ? -1 : 1
+//        print("direction \(direction)")
+        return direction * G * actingMass / pow((actingPosition - self.position.x),2)
     }
     
 }
