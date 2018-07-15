@@ -19,9 +19,18 @@ class GameScene: SKScene {
     private var previousTime : TimeInterval?
     
     override func didMove(to view: SKView) {
-        //initialize instance variables when sthe controller switches to this view
+        //initialize instance variables when the controller switches to this view
+        
+        //INITALIZE SHIP
         self.screenSize = (self.size.width + self.size.height) * 0.05
         self.ship = Ship(size: self.screenSize!)
+        self.ship?.position.x = 0
+        self.ship?.position.y = 250
+        self.ship?.velocity.dx = ((self.ship?.G)! * (self.ship?.actingMass)! / (self.ship?.position.y)!).squareRoot()
+        // virial thm benchmark
+        // produces stable orbit
+        self.ship?.velocity.dy = 0
+        
         self.slingShot = SlingShot()
         self.addChild(self.ship!)
         self.previousTime = -1
@@ -94,9 +103,7 @@ class GameScene: SKScene {
             print("INITIALIZING PREVIOUS TIME")
             return
         }
-        //use previous time for calculating change in time (dt) between each frame (usually ~1/60 seconds)
-        let dt : CGFloat = CGFloat(currentTime - self.previousTime!)
-        
+        let dt : CGFloat = 0.01
         
         //animate the ship when it's slinging
         if(self.slingShot?.isSlinging)! {
@@ -117,16 +124,6 @@ class GameScene: SKScene {
                 self.slingShot?.removeFromParent()
             }
             
-            let x = self.ship?.position.x
-            let y = self.ship?.position.y
-            
-            //at this point, the ship is not slinging anymore and you have the ship's position, velocity, and the time between each frame
-
-//            for(planet in self.planets) {
-//                planet.gravitateShip(ship: self.ship!, forTime: dt)
-//            }
-
-            //change the ship's position accordingly based on its current velocity
             self.ship?.travelLinear(forTime: dt)
             
         }
