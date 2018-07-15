@@ -98,14 +98,15 @@ class GameScene: SKScene {
         let dt : CGFloat = CGFloat(currentTime - self.previousTime!)
         
         
-        //animate the ship when it's slinging (accelerating)
+        //animate the ship when it's slinging
         if(self.slingShot?.isSlinging)! {
-            //change the ship's position & velocity accordingly
-            self.slingShot?.slingShip(ship: self.ship!, forTime: dt)
+            //change the ship's position accordingly based on its current velocity
+            self.ship?.travelLinear(forTime: dt)
+            //change the ship's velocity accordingly
+            self.slingShot?.accelerateShip(ship: self.ship!, forTime: dt)
             
-        } else { //animate the ship when it's not slinging (constant velocity)
+        } else { //animate the ship otherwise
             
-            //below varibales only used for checking whether or not the slingshot is done slinging
             let vx = self.ship?.velocity.dx
             let vy = self.ship?.velocity.dy
             let v = sqrt(vx! * vx! + vy! * vy!)
@@ -116,19 +117,21 @@ class GameScene: SKScene {
                 self.slingShot?.removeFromParent()
             }
             
-//            //this is ideally how the planets would alter the ship's velocity (not position) accordingly
-//            for(planet in planets) {
+            let x = self.ship?.position.x
+            let y = self.ship?.position.y
+            
+            //at this point, the ship is not slinging anymore and you have the ship's position, velocity, and the time between each frame
+
+//            for(planet in self.planets) {
 //                planet.gravitateShip(ship: self.ship!, forTime: dt)
 //            }
-            
-            //NOTE #1: it should be the ship's responsibility to travel (change its position based on its velocity) for a given amount of time since it knows its position & velocity at any given instance (frame)
-            //NOTE #2: we don't want the ship affected by gravity while we are slinging
-            //NOTE #3: gravity shouldn't edit the ships position, that is the ship's job. It should only alter the velocity. That way, the ship discretely travels linearly between each frame; Gravity doesn't NEED to change the ship's position -- that's the way the code is structured at the moment
-            
+
+            //change the ship's position accordingly based on its current velocity
+            self.ship?.travelLinear(forTime: dt)
             
         }
         //change the ship's position accordingly based on its current velocity
-        self.ship?.travel(forTime: dt)
+        //self.ship?.travelLinear(forTime: dt)
         
         self.previousTime = currentTime
     }

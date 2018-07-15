@@ -42,7 +42,7 @@ public class Ship: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
     //it is the ship's responsibility to travel for the specified amount of time
-    public func travel(forTime dt: CGFloat) {
+    public func travelLinear(forTime dt: CGFloat) {
         //basic kinematic equations for the ship flying away (or sitting still)
         self.position.x += self.velocity.dx * dt
         self.position.y += self.velocity.dy * dt
