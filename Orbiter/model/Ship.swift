@@ -48,20 +48,33 @@ public class Ship: SKShapeNode {
     }
     //it is the ship's responsibility to travel for the specified amount of time
     public func travelLinear(forTime dt: CGFloat) {
-        // Euler integrator
-        let acceleration = calculateGravitationalAcceleration()
-        self.position.x += self.velocity.dx * dt
-        self.position.y += self.velocity.dy * dt
+        // Semi-Implicit Euler integrator
+        let acceleration = calculateGravitationalAcceleration(position: self.position)
         self.velocity.dx += acceleration.x * dt
         self.velocity.dy += acceleration.y * dt
+        self.position.x += self.velocity.dx * dt
+        self.position.y += self.velocity.dy * dt
     }
     
-    func calculateGravitationalAcceleration() -> CartesianVector {
+    public func travelVerlet(forTime dt: CGFloat) {
+        let a1 = calculateGravitationalAcceleration(position: self.position)
+        let v_mid = self.velocity.dx + a1.x * dt/2.0
+        // Valid for F independent of v
+        
+        let x2 = self.position.x + v_mid * dt
+        let y2 = x2
+        let a2 = calculateGravitationalAcceleration(position: CGPoint(x: x2, y: y2))
+        let v2 = v_mid + a2.x * dt/2
+    }
+    
+    func calculateGravitationalAcceleration(position: CGPoint) -> CartesianVector {
 
         let xDist : CGFloat = (actingPosition.x - self.position.x)
         let yDist : CGFloat = (actingPosition.y - self.position.y)
         let dist : CGFloat = (pow(xDist, 2) + pow(yDist, 2)).squareRoot()
         let magnitude : CGFloat = min(G * actingMass / pow(dist, 2),10000)
+        
+        print(dist)
         // Min function meant to avoid exrreme behavior where collisions would happen (asymptotic r)
         return CartesianVector(x: magnitude * xDist/dist, y: magnitude * yDist/dist)
     }
