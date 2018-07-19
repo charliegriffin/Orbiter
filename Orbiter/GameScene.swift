@@ -34,48 +34,50 @@ class GameScene: SKScene {
         self.slingShot = SlingShot()
         self.addChild(self.ship!)
         self.previousTime = -1
+        
+        //remove the below 4 line to remove background & improve simulator FPS
+        let background = Background(frame: (self.view?.frame)!)
+        for star in background.backgroundStars {
+            self.addChild(star)
+        }
+        //remove the below 5 lines to get rid of the earth image
+        let image = UIImage(named: "planet06-3.png")
+        let texture = SKTexture(image: image!)
+        let earth = SKSpriteNode(texture: texture)
+        earth.position = CGPoint(x: 0, y: 0)
+        self.addChild(earth)
+        
         print("STARTING APP")
     }
     
     //when you place your finger on the screen
     func touchDown(atPoint pos : CGPoint) {
-        
         //place the ship at the position
         self.ship?.position = pos
-        self.ship?.velocity.dx = 0
-        self.ship?.velocity.dy = 0
-        
+        self.ship?.velocity = CGVector(dx: 0, dy: 0)
         //if the slingshot is still slinging when you reposition the ship, get rid of the slingshot first
         if(self.slingShot?.isSlinging)! {
             self.slingShot?.removeFromParent()
         }
-        //anchor the slingshot to the point you touched
+        //anchor the slingshot to the ship
         self.slingShot = SlingShot()
-        self.slingShot?.attachToInitPos(initPos: pos)
+        self.slingShot?.attachToShip(ship: self.ship!)
         //add the slingshot to the scene
         self.addChild(self.slingShot!)
     }
     
-    //when you touch a point on the screen
+    //when you drag your finger on the screen
     func touchMoved(toPoint pos : CGPoint) {
-        //update the ship's position
-        self.ship?.position = pos
         //redraw the slingshot
-        self.slingShot?.stretchFromInitPosToShip(ship: self.ship!)
+        self.slingShot?.drawFromShipToFinalPos(finalPos: pos)
     }
     
     //when you lift your finger off the screen
     func touchUp(atPoint pos : CGPoint) {
-        //don't sling the ship unless you drag it greater than X pixels from its initial position: TODO: PUT IN MODEL
-        if(self.slingShot?.radius.isLess(than: self.screenSize! / 10))! {
-            //self.slingShot?.isSlinging = false
-        } else {
-            self.slingShot?.isSlinging = true
-        }
-        //get rid of the slingshot from the scene if it isn't currently slinging
-        if(!(self.slingShot?.isSlinging)!) {
-            self.slingShot?.removeFromParent()
-        }
+        //sling the ship
+        self.slingShot?.detachFromShip(ship: self.ship!)
+        //get rid of the slingshot from the scene
+        self.slingShot?.removeFromParent()
     }
     
     //the below 4 methods were not added by Alex
@@ -105,31 +107,10 @@ class GameScene: SKScene {
         }
         let dt : CGFloat = 0.01
         
-        //animate the ship when it's slinging
-        if(self.slingShot?.isSlinging)! {
-            //change the ship's position accordingly based on its current velocity
-            self.ship?.travelLinear(forTime: dt)
-            //change the ship's velocity accordingly
-            self.slingShot?.accelerateShip(ship: self.ship!, forTime: dt)
-            
-        } else { //animate the ship otherwise
-            
-            let vx = self.ship?.velocity.dx
-            let vy = self.ship?.velocity.dy
-            let v = sqrt(vx! * vx! + vy! * vy!)
-            
-            //if the slingshot is done slinging and the ship is flying away
-            if(!(self.slingShot?.isSlinging)! && v > 0) {
-                //remove the slingshot node from the scene
-                self.slingShot?.removeFromParent()
-            }
-            
+        //only let gravity effect the ship when it's not slinging
+        if(!(self.slingShot?.isSlinging)!) {
             self.ship?.travelVerlet(forTime: dt)
-            
         }
-        //change the ship's position accordingly based on its current velocity
-        //self.ship?.travelLinear(forTime: dt)
-        
         self.previousTime = currentTime
     }
 }

@@ -30,6 +30,7 @@ public class Ship: SKShapeNode {
     //the desired initializer for a new Ship object with size relative to the screen
     public convenience init(size: CGFloat) {
         self.init(rectOf: CGSize.init(width: size, height: size), cornerRadius: size * 0.3)
+        //self.init
         self.mass = 1
         self.size = size
         self.velocity = CGVector(dx: 0, dy: 0)
