@@ -124,7 +124,7 @@ class GameScene: SKScene {
                 self.slingShot?.removeFromParent()
             }
             
-            self.ship?.travelLinear(forTime: dt)
+            self.ship?.travelVerlet(forTime: dt)
             
         }
         //change the ship's position accordingly based on its current velocity
