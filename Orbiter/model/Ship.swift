@@ -74,4 +74,43 @@ public class Ship: SKShapeNode {
         return CGVector(dx: magnitude * xDist/dist, dy: magnitude * yDist/dist)
     }
     
+    public func thrust(forTime dt: CGFloat, towardPoint point: CGPoint) {
+        
+        if(point == nil) {
+            return
+        }
+        let dx = point.x - self.position.x
+        let dy = point.y - self.position.y
+        
+        if(dx == 0 && dy == 0) { //double check logic here
+            return
+        }
+        let vx = self.velocity.dx
+        let vy = self.velocity.dy
+        
+        let aMax = CGFloat(6500) //maximum engine strength
+        
+        let u = CGFloat(0.9) //stability coefficient (favors final deceleration)
+        let v = CGFloat(2.5) //reactivity coefficient (favors initial acceleration)
+        
+        //alex sigmoid thrust functions
+        var ax = (2 * aMax) / (1 + pow( CGFloat(M_E), u * vx - v * dx )) - aMax
+        var ay = (2 * aMax) / (1 + pow( CGFloat(M_E), u * vy - v * dy )) - aMax
+        
+        var a = sqrt(ax * ax + ay * ay)
+        var c = CGFloat(1)
+        
+        if(a > aMax) {
+            c = sqrt((aMax * aMax) / (a * a)) //supply/demand ratio
+            ax *= c
+            ay *= c
+            a = sqrt(ax * ax + ay * ay)
+        }
+        //print(ax, ay, a, c)
+        self.velocity.dx += ax * dt
+        self.velocity.dy += ay * dt
+        self.position.x += self.velocity.dx * dt
+        self.position.y += self.velocity.dy * dt
+    }
+    
 }
