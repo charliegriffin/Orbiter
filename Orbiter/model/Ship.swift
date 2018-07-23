@@ -9,23 +9,27 @@
 import Foundation
 import SpriteKit
 
+public var ships: [Ship] = []
+
 public class Ship: SKShapeNode {
     
     public var mass: CGFloat
     public var size: CGFloat
     public var velocity : CGVector
-    public var actingMass : CGFloat = 1000000000000000000  // lol gravity is weak
-    var actingPosition = CGPoint(x: 0, y: 0)
     public var G : CGFloat = 6.674 * pow(10,-11)
+    public var id : Int
     
     //required by Swift for implementation
     public override init() {
         self.mass = 1
         self.size = 1
         self.velocity = CGVector(dx: 0, dy: 0)
+        self.id = ships.count
         super.init()
         self.position = CGPoint(x: 0, y: 0)
         self.fillColor = .brown
+        
+        ships.append(self)
     }
     //the desired initializer for a new Ship object with size relative to the screen
     public convenience init(size: CGFloat) {
@@ -65,13 +69,21 @@ public class Ship: SKShapeNode {
     }
     
     func calculateGravitationalAcceleration(position: CGPoint) -> CGVector {
-
-        let xDist : CGFloat = (actingPosition.x - position.x)
-        let yDist : CGFloat = (actingPosition.y - position.y)
-        let dist : CGFloat = (pow(xDist, 2) + pow(yDist, 2)).squareRoot()
-        let magnitude : CGFloat = min(G * actingMass / pow(dist, 2),10000)
         
-        return CGVector(dx: magnitude * xDist/dist, dy: magnitude * yDist/dist)
+        var accelerationVector = CGVector(dx: 0.0, dy: 0.0)
+
+        for ship in ships {
+            if (self.id != ship.id){
+                let xDist : CGFloat = (ship.position.x - position.x)
+                let yDist : CGFloat = (ship.position.y - position.y)
+                let dist : CGFloat = (pow(xDist, 2) + pow(yDist, 2)).squareRoot()
+                let mag = min(G * ship.mass / pow(dist, 2),10000)
+                accelerationVector.dx += mag * xDist/dist
+                accelerationVector.dy += mag * yDist/dist
+            }
+        }
+        
+        return accelerationVector
     }
     
     public func thrust(forTime dt: CGFloat, towardPoint point: CGPoint) {

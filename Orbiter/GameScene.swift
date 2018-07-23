@@ -12,6 +12,8 @@ import GameplayKit
 class GameScene: SKScene {
     
     private var ship : Ship?
+    private var ship2 : Ship?
+    private var ship3 : Ship?
     private var slingShot : SlingShot?
     //screenSize is a constant representing the size of the screen
     private var screenSize : CGFloat?
@@ -26,13 +28,36 @@ class GameScene: SKScene {
         self.ship = Ship(size: self.screenSize!)
         self.ship?.position.x = 0
         self.ship?.position.y = 250
-        self.ship?.velocity.dx = ((self.ship?.G)! * (self.ship?.actingMass)! / (self.ship?.position.y)!).squareRoot()
+        self.ship?.mass = 1
+        self.ship?.velocity.dx = ((self.ship?.G)! * (1000000000000000000.0) / (self.ship?.position.y)!).squareRoot()
         // virial thm benchmark
         // produces stable orbit
         self.ship?.velocity.dy = 0
         
         self.slingShot = SlingShot()
         self.addChild(self.ship!)
+        
+        self.ship2 = Ship(size: self.screenSize!)
+        self.ship2?.mass = 1000000000000000000
+        self.ship2?.position.x = 0
+        self.ship2?.position.y = 0
+        self.ship2?.velocity.dx = 0        // virial thm benchmark
+        // produces stable orbit
+        self.ship2?.velocity.dy = 0
+        
+        self.addChild(self.ship2!)
+        
+        self.ship3 = Ship(size: self.screenSize!/2)
+        self.ship3?.mass = 0.107
+        self.ship3?.position.x = 0
+        self.ship3?.position.y = 1.524 * 250
+        self.ship3?.velocity.dx = ((self.ship?.G)! * (1000000000000000000.0) / (self.ship3?.position.y)!).squareRoot()
+        self.ship3?.velocity.dy = 0
+        
+        self.addChild(self.ship3!)
+
+        
+        
         self.previousTime = -1
         
         //remove the below 4 line to remove background & improve simulator FPS
@@ -108,9 +133,14 @@ class GameScene: SKScene {
         let dt : CGFloat = 0.01
         
         //only let gravity effect the ship when it's not slinging
-        if(!(self.slingShot?.isSlinging)!) {
-            self.ship?.travelVerlet(forTime: dt)
+//        if(!(self.slingShot?.isSlinging)!) {
+//            self.ship?.travelVerlet(forTime: dt)
+//        }
+        
+        for ship in ships {
+            ship.travelVerlet(forTime: dt)
         }
+        
         self.previousTime = currentTime
     }
 }
