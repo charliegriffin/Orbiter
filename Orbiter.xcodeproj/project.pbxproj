@@ -18,7 +18,11 @@
 		3C3C779020F176710005A56A /* SlingShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3C778F20F176710005A56A /* SlingShot.swift */; };
 		3C3CE5102100F6B700ABBEAF /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3CE50F2100F6B700ABBEAF /* Background.swift */; };
 		3C3CE5122100F6E300ABBEAF /* BackgroundStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3CE5112100F6E300ABBEAF /* BackgroundStar.swift */; };
-		3C3CE51A21010A7400ABBEAF /* planet06-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3CE51921010A7400ABBEAF /* planet06-3.png */; };
+		3C7E03692106741A00BA0716 /* Mass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E03682106741A00BA0716 /* Mass.swift */; };
+		3C7E036B2106769400BA0716 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E036A2106769400BA0716 /* spaceship.png */; };
+		3C7E036D210686D600BA0716 /* mars.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E036C210686D600BA0716 /* mars.png */; };
+		3C7E036F210686E000BA0716 /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E036E210686E000BA0716 /* earth.png */; };
+		3C7E03712106879E00BA0716 /* moon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E03702106879E00BA0716 /* moon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +39,11 @@
 		3C3C778F20F176710005A56A /* SlingShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlingShot.swift; sourceTree = "<group>"; };
 		3C3CE50F2100F6B700ABBEAF /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		3C3CE5112100F6E300ABBEAF /* BackgroundStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundStar.swift; sourceTree = "<group>"; };
-		3C3CE51921010A7400ABBEAF /* planet06-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "planet06-3.png"; sourceTree = "<group>"; };
+		3C7E03682106741A00BA0716 /* Mass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mass.swift; sourceTree = "<group>"; };
+		3C7E036A2106769400BA0716 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
+		3C7E036C210686D600BA0716 /* mars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mars.png; sourceTree = "<group>"; };
+		3C7E036E210686E000BA0716 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
+		3C7E03702106879E00BA0716 /* moon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +83,10 @@
 				3C3C777C20F1753D0005A56A /* GameViewController.swift */,
 				3C3C777E20F1753D0005A56A /* Main.storyboard */,
 				3C3C778120F1753E0005A56A /* Assets.xcassets */,
-				3C3CE51921010A7400ABBEAF /* planet06-3.png */,
+				3C7E03702106879E00BA0716 /* moon.png */,
+				3C7E036C210686D600BA0716 /* mars.png */,
+				3C7E036E210686E000BA0716 /* earth.png */,
+				3C7E036A2106769400BA0716 /* spaceship.png */,
 				3C3C778320F1753E0005A56A /* LaunchScreen.storyboard */,
 				3C3C778620F1753E0005A56A /* Info.plist */,
 			);
@@ -89,6 +100,7 @@
 				3C3C778F20F176710005A56A /* SlingShot.swift */,
 				3C3CE50F2100F6B700ABBEAF /* Background.swift */,
 				3C3CE5112100F6E300ABBEAF /* BackgroundStar.swift */,
+				3C7E03682106741A00BA0716 /* Mass.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -151,8 +163,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C3CE51A21010A7400ABBEAF /* planet06-3.png in Resources */,
+				3C7E036B2106769400BA0716 /* spaceship.png in Resources */,
 				3C3C778020F1753D0005A56A /* Main.storyboard in Resources */,
+				3C7E036D210686D600BA0716 /* mars.png in Resources */,
+				3C7E036F210686E000BA0716 /* earth.png in Resources */,
+				3C7E03712106879E00BA0716 /* moon.png in Resources */,
 				3C3C777720F1753D0005A56A /* GameScene.sks in Resources */,
 				3C3C778220F1753E0005A56A /* Assets.xcassets in Resources */,
 				3C3C778520F1753E0005A56A /* LaunchScreen.storyboard in Resources */,
@@ -167,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C3C777B20F1753D0005A56A /* GameScene.swift in Sources */,
+				3C7E03692106741A00BA0716 /* Mass.swift in Sources */,
 				3C3CE5122100F6E300ABBEAF /* BackgroundStar.swift in Sources */,
 				3C3C778E20F176590005A56A /* Ship.swift in Sources */,
 				3C3C779020F176710005A56A /* SlingShot.swift in Sources */,
