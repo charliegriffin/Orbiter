@@ -13,13 +13,20 @@ public class Ship: Mass {
     
     public var isThrusting : Bool = false
     
+    public override init(texture: SKTexture, id: Int) {
+        super.init(texture: texture, id: id)
+        self.isThrusting = false
+    }
+    
     public override init(imageName: String, id: Int) {
         super.init(imageName: imageName, id: id)
         self.isThrusting = false
     }
     
     required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.isThrusting = false
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
     }
     
     public func redrawOrientation(forTime dt: CGFloat) {
@@ -45,8 +52,8 @@ public class Ship: Mass {
         
         let aMax = CGFloat(5000) //maximum engine strength (6500)
         
-        let u = CGFloat(0.9) //stability coefficient (favors final deceleration)
-        let v = CGFloat(2.5) //reactivity coefficient (favors initial acceleration)
+        let u = CGFloat(0.9) //stability coefficient (favors final deceleration & velocity control)
+        let v = CGFloat(2.5) //reactivity coefficient (favors initial acceleration & point attraction)
         
         //alex sigmoid thrust functions
         var ax = (2 * aMax) / (1 + pow( CGFloat(M_E), u * vx - v * dx )) - aMax
@@ -66,6 +73,8 @@ public class Ship: Mass {
         self.velocity.dy += ay * dt
         self.position.x += self.velocity.dx * dt
         self.position.y += self.velocity.dy * dt
+        
+        print("POSITION: ", self.position, "VELOCITY: ", self.velocity)
     }
     
 }

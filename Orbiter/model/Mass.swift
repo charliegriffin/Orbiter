@@ -18,6 +18,22 @@ public class Mass: SKSpriteNode {
     public var velocity : CGVector
     public var id : Int
     
+//    override public func awakeFromNib() {
+//        super.awakeFromNib()
+//        //custom logic goes here
+//    }
+    
+    init(texture: SKTexture, id: Int) {
+        self.mass = 1
+        self.velocity = CGVector(dx: 0, dy: 0)
+        self.id = id
+        //super.init(texture: texture, color: .white, size: texture.size())
+        super.init(texture: texture, color: .white, size: texture.size())
+        self.position = CGPoint(x: 0, y: 0)
+        
+        masses.append(self)
+    }
+    
     init(imageName: String, id: Int) {
         self.mass = 1
         self.velocity = CGVector(dx: 0, dy: 0)
@@ -30,7 +46,15 @@ public class Mass: SKSpriteNode {
         masses.append(self)
     }
     required public init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.mass = -1
+        self.velocity = CGVector(dx: 0, dy: 0)
+        self.id = -1
+        super.init(coder: aDecoder)!
+        
+        masses.append(self)
+        
+        //self.position = CGPoint(x: 0, y: 0)
+        //fatalError("init(coder:) has not been implemented")
     }
     //    //it is the ship's responsibility to travel for the specified amount of time
     //    public func travelLinear(forTime dt: CGFloat) {
@@ -116,7 +140,7 @@ public class Mass: SKSpriteNode {
         let w1 = mass1.size.width
         let w2 = mass2.size.width
         
-        if(drMag > (w1 + w2) / 2) {
+        if(drMag > 0.5 * (w1 + w2)) {
             return
         }
         //        mass.velocity.dx *= -1
@@ -153,6 +177,11 @@ public class Mass: SKSpriteNode {
         mass1.velocity.dy = v1yf
         mass2.velocity.dx = v2xf
         mass2.velocity.dy = v2yf
+        
+//        mass1.position.x = x2 + drMag * cos(pocAngle)
+//        mass1.position.y = y2 + drMag * sin(pocAngle)
+//        mass2.position.x = 0
+//        mass2.position.y = 0
     }
     
 }

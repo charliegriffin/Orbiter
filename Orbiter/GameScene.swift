@@ -152,8 +152,6 @@ class GameScene: SKScene {
         
         //travelVerlet(forTime: dt)
         
-        Mass.handleCollisions(width: CGFloat(self.screenWidth!), height: CGFloat(self.screenHeight!))
-        
         if(self.ship?.isThrusting)! {
             self.ship?.thrust(forTime: dt, towardPoint: self.fingerPoint!)
         }
@@ -161,6 +159,8 @@ class GameScene: SKScene {
         self.ship?.travelVerlet(forTime: dt)
         self.earth?.travelVerlet(forTime: dt)
         self.moon?.travelVerlet(forTime: dt)
+        
+        Mass.handleCollisions(width: CGFloat(self.screenWidth!), height: CGFloat(self.screenHeight!))
         
         //        for mass in (self.earth?.masses)! {
         //            mass.travelVerlet(forTime: dt)
