@@ -23,8 +23,6 @@
 		3C7E0379210EAC3600BA0716 /* mars.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E0375210EAC3600BA0716 /* mars.png */; };
 		3C7E037A210EAC3600BA0716 /* earth.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E0376210EAC3600BA0716 /* earth.png */; };
 		3C7E037B210EAC3600BA0716 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E0377210EAC3600BA0716 /* spaceship.png */; };
-		3C7E037F2116B1F800BA0716 /* GameSceneTwo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E037E2116B1F800BA0716 /* GameSceneTwo.sks */; };
-		3C7E038121176F4800BA0716 /* GameSceneTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E038021176F4800BA0716 /* GameSceneTwo.swift */; };
 		3C7E0384211785A200BA0716 /* LevelOne.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E0383211785A200BA0716 /* LevelOne.sks */; };
 		3C7E0386211785AC00BA0716 /* LevelOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E0385211785AC00BA0716 /* LevelOne.swift */; };
 		3C7E0388211785B700BA0716 /* LevelTwo.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E0387211785B700BA0716 /* LevelTwo.sks */; };
@@ -54,8 +52,6 @@
 		3C7E0375210EAC3600BA0716 /* mars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mars.png; sourceTree = "<group>"; };
 		3C7E0376210EAC3600BA0716 /* earth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = earth.png; sourceTree = "<group>"; };
 		3C7E0377210EAC3600BA0716 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
-		3C7E037E2116B1F800BA0716 /* GameSceneTwo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameSceneTwo.sks; sourceTree = "<group>"; };
-		3C7E038021176F4800BA0716 /* GameSceneTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneTwo.swift; sourceTree = "<group>"; };
 		3C7E0383211785A200BA0716 /* LevelOne.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelOne.sks; sourceTree = "<group>"; };
 		3C7E0385211785AC00BA0716 /* LevelOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelOne.swift; sourceTree = "<group>"; };
 		3C7E0387211785B700BA0716 /* LevelTwo.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelTwo.sks; sourceTree = "<group>"; };
@@ -111,8 +107,6 @@
 				3C3C778120F1753E0005A56A /* Assets.xcassets */,
 				3C3C778320F1753E0005A56A /* LaunchScreen.storyboard */,
 				3C3C778620F1753E0005A56A /* Info.plist */,
-				3C7E037E2116B1F800BA0716 /* GameSceneTwo.sks */,
-				3C7E038021176F4800BA0716 /* GameSceneTwo.swift */,
 			);
 			path = Orbiter;
 			sourceTree = "<group>";
@@ -219,7 +213,6 @@
 				3C3C778220F1753E0005A56A /* Assets.xcassets in Resources */,
 				3C7E0379210EAC3600BA0716 /* mars.png in Resources */,
 				3C7E038C211785CA00BA0716 /* LevelThree.sks in Resources */,
-				3C7E037F2116B1F800BA0716 /* GameSceneTwo.sks in Resources */,
 				3C7E039121178EDB00BA0716 /* MainMenu.xib in Resources */,
 				3C3C778520F1753E0005A56A /* LaunchScreen.storyboard in Resources */,
 			);
@@ -244,7 +237,6 @@
 				3C3C777D20F1753D0005A56A /* GameViewController.swift in Sources */,
 				3C3C777520F1753D0005A56A /* AppDelegate.swift in Sources */,
 				3C3CE5102100F6B700ABBEAF /* Background.swift in Sources */,
-				3C7E038121176F4800BA0716 /* GameSceneTwo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
