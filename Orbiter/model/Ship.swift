@@ -9,88 +9,38 @@
 import Foundation
 import SpriteKit
 
-public var ships: [Ship] = []
-
-public class Ship: SKShapeNode {
+public class Ship: Mass {
     
-    public var mass: CGFloat
-    public var size: CGFloat
-    public var velocity : CGVector
-    public var G : CGFloat = 6.674 * pow(10,-11)
-    public var id : Int
+    public var isThrusting : Bool = false
     
-    //required by Swift for implementation
-    public override init() {
-        self.mass = 1
-        self.size = 1
-        self.velocity = CGVector(dx: 0, dy: 0)
-        self.id = ships.count
-        super.init()
-        self.position = CGPoint(x: 0, y: 0)
-        self.fillColor = .brown
-        
-        ships.append(self)
-    }
-    //the desired initializer for a new Ship object with size relative to the screen
-    public convenience init(size: CGFloat) {
-        self.init(rectOf: CGSize.init(width: size, height: size), cornerRadius: size * 0.3)
-        //self.init
-        self.mass = 1
-        self.size = size
-        self.velocity = CGVector(dx: 0, dy: 0)
-        self.position = CGPoint(x: 0, y: 0)
-        self.fillColor = .brown
-    }
-    //required by Swift
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    //it is the ship's responsibility to travel for the specified amount of time
-    public func travelLinear(forTime dt: CGFloat) {
-        // Semi-Implicit Euler integrator
-        let acceleration = calculateGravitationalAcceleration(position: self.position)
-        self.velocity.dx += acceleration.dx * dt
-        self.velocity.dy += acceleration.dy * dt
-        self.position.x += self.velocity.dx * dt
-        self.position.y += self.velocity.dy * dt
+    public override init(texture: SKTexture, id: Int) {
+        super.init(texture: texture, id: id)
+        self.isThrusting = false
     }
     
-    public func travelVerlet(forTime dt: CGFloat) {
-        let a1 = calculateGravitationalAcceleration(position: self.position)
-        let v_mid = CGVector(dx: self.velocity.dx + a1.dx * dt/2.0, dy: self.velocity.dy + a1.dy * dt/2.0)
-        // Valid for F independent of v
-        
-        let r2 = CGPoint(x: self.position.x + v_mid.dx * dt, y: self.position.y + v_mid.dy * dt)
-        let a2 = calculateGravitationalAcceleration(position: r2)
-        let v2 = CGVector(dx: v_mid.dx + a2.dx * dt/2, dy: v_mid.dy + a2.dy * dt/2)
-        
-        self.position = r2
-        self.velocity = v2
+    public override init(imageName: String, id: Int) {
+        super.init(imageName: imageName, id: id)
+        self.isThrusting = false
     }
     
-    func calculateGravitationalAcceleration(position: CGPoint) -> CGVector {
-        
-        var accelerationVector = CGVector(dx: 0.0, dy: 0.0)
-
-        for ship in ships {
-            if (self.id != ship.id){
-                let xDist : CGFloat = (ship.position.x - position.x)
-                let yDist : CGFloat = (ship.position.y - position.y)
-                let dist : CGFloat = (pow(xDist, 2) + pow(yDist, 2)).squareRoot()
-                let mag = min(G * ship.mass / pow(dist, 2),10000)
-                accelerationVector.dx += mag * xDist/dist
-                accelerationVector.dy += mag * yDist/dist
-            }
-        }
-        
-        return accelerationVector
+    required public init(coder aDecoder: NSCoder) {
+        self.isThrusting = false
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func redrawOrientation(forTime dt: CGFloat) {
+        //update ship orientation (put into a method for the ship)
+        let shipDirection = GameScene.getThetaForVector(vector: self.velocity)
+        let rotate = SKAction.rotate(toAngle: shipDirection, duration: TimeInterval(dt))
+        self.run(rotate)
     }
     
     public func thrust(forTime dt: CGFloat, towardPoint point: CGPoint) {
         
-        if(point == nil) {
-            return
-        }
+        //        if(point == nil) {
+        //            return
+        //        }
         let dx = point.x - self.position.x
         let dy = point.y - self.position.y
         
@@ -100,10 +50,10 @@ public class Ship: SKShapeNode {
         let vx = self.velocity.dx
         let vy = self.velocity.dy
         
-        let aMax = CGFloat(6500) //maximum engine strength
+        let aMax = CGFloat(5000) //maximum engine strength (6500)
         
-        let u = CGFloat(0.9) //stability coefficient (favors final deceleration)
-        let v = CGFloat(2.5) //reactivity coefficient (favors initial acceleration)
+        let u = CGFloat(0.9) //stability coefficient (favors final deceleration & velocity control)
+        let v = CGFloat(2.5) //reactivity coefficient (favors initial acceleration & point attraction)
         
         //alex sigmoid thrust functions
         var ax = (2 * aMax) / (1 + pow( CGFloat(M_E), u * vx - v * dx )) - aMax
@@ -122,7 +72,7 @@ public class Ship: SKShapeNode {
         self.velocity.dx += ax * dt
         self.velocity.dy += ay * dt
         self.position.x += self.velocity.dx * dt
-        self.position.y += self.velocity.dy * dt
+        self.position.y += self.velocity.dy * dt        
     }
     
 }
