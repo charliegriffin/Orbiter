@@ -72,9 +72,7 @@ public class Ship: Mass {
         self.velocity.dx += ax * dt
         self.velocity.dy += ay * dt
         self.position.x += self.velocity.dx * dt
-        self.position.y += self.velocity.dy * dt
-        
-        print("POSITION: ", self.position, "VELOCITY: ", self.velocity)
+        self.position.y += self.velocity.dy * dt        
     }
     
 }

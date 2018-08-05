@@ -31,6 +31,8 @@
 		3C7E038E211785D300BA0716 /* LevelThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E038D211785D300BA0716 /* LevelThree.swift */; };
 		3C7E039121178EDB00BA0716 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E039021178EDB00BA0716 /* MainMenu.xib */; };
 		3C7E039321178F6F00BA0716 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E039221178F6F00BA0716 /* MainMenu.swift */; };
+		3C7E039521179A6F00BA0716 /* StartMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E039421179A6F00BA0716 /* StartMenu.sks */; };
+		3C7E039721179A7A00BA0716 /* StartMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E039621179A7A00BA0716 /* StartMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		3C7E038D211785D300BA0716 /* LevelThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelThree.swift; sourceTree = "<group>"; };
 		3C7E039021178EDB00BA0716 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		3C7E039221178F6F00BA0716 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		3C7E039421179A6F00BA0716 /* StartMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartMenu.sks; sourceTree = "<group>"; };
+		3C7E039621179A7A00BA0716 /* StartMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 			children = (
 				3C7E039021178EDB00BA0716 /* MainMenu.xib */,
 				3C7E039221178F6F00BA0716 /* MainMenu.swift */,
+				3C7E039421179A6F00BA0716 /* StartMenu.sks */,
+				3C7E039621179A7A00BA0716 /* StartMenu.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -214,6 +220,7 @@
 				3C7E0379210EAC3600BA0716 /* mars.png in Resources */,
 				3C7E038C211785CA00BA0716 /* LevelThree.sks in Resources */,
 				3C7E039121178EDB00BA0716 /* MainMenu.xib in Resources */,
+				3C7E039521179A6F00BA0716 /* StartMenu.sks in Resources */,
 				3C3C778520F1753E0005A56A /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +244,7 @@
 				3C3C777D20F1753D0005A56A /* GameViewController.swift in Sources */,
 				3C3C777520F1753D0005A56A /* AppDelegate.swift in Sources */,
 				3C3CE5102100F6B700ABBEAF /* Background.swift in Sources */,
+				3C7E039721179A7A00BA0716 /* StartMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
