@@ -40,6 +40,23 @@ class LevelThree: SKScene {
         self.ship?.id = 0
         self.ship?.velocity.dx = ((G) * (self.mars?.mass)! / (self.ship?.position.y)!).squareRoot()
         
+        let pathToDraw:CGMutablePath = CGMutablePath()
+        let myLine:SKShapeNode = SKShapeNode(path:pathToDraw)
+        
+        let startPoint = CGPoint(x: 100, y: 100)
+        let endPoint = CGPoint(x: 100, y: -100)
+        
+        pathToDraw.move(to: startPoint)
+        pathToDraw.addLine(to: endPoint)
+        
+//        CGPathMoveToPoint(pathToDraw, NULL, 100.0, 100)
+//        CGPathAddLineToPoint(pathToDraw, NULL, 50, 50)
+        
+        myLine.path = pathToDraw
+        myLine.strokeColor = SKColor.red
+        
+        self.addChild(myLine)
+        
         print("STARTING APP")
     }
     

@@ -25,7 +25,7 @@ class GameScene: SKScene {
         //initialize instance variables when the controller switches to this view
         self.screenWidth = view.frame.width
         self.screenHeight = view.frame.height
-        print(self.screenWidth, self.screenHeight)
+        print(self.screenWidth as Any, self.screenHeight as Any)
         
         //INITIALIZE EARTH
         self.earth = Mass(imageName: "earth.png", id: 1)
@@ -74,7 +74,7 @@ class GameScene: SKScene {
     //when you place your finger on the screen
     func touchDown(atPoint pos : CGPoint) {
         
-        self.ship?.isThrusting = true
+//        self.ship?.isThrusting = true
         self.fingerPoint = pos
         
         //UNCOMMENT BELOW & COMMENT OUT ABOVE FOR SLINGSHOT
