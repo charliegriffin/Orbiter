@@ -42,16 +42,13 @@ public class Ship: Mass {
     public func drawPath() {
         let path = CGMutablePath()
         let myLine:SKShapeNode = SKShapeNode(path:path)
-        //        path.move(to: points[0])
-        //        print(points)
+
         path.addLines(between: (self.path))
-        //        path.closeSubpath()
         
         myLine.path = path
         myLine.strokeColor = SKColor.white
         
         self.parent?.addChild(myLine)
-        //        print(self.points)
     }
     
     public func thrust(forTime dt: CGFloat, towardPoint point: CGPoint) {

@@ -79,6 +79,9 @@ public class Mass: SKSpriteNode {
         if(self.isKind(of: Ship.self)) {
             (self as! Ship).redrawOrientation(forTime: dt)
             (self as! Ship).path.append(self.position)
+            if((self as! Ship).path.count == 500){
+                (self as! Ship).drawPath()
+            }
         }
     }
     
