@@ -17,8 +17,6 @@ class LevelThree: SKScene {
     private var screenWidth : CGFloat?
     private var screenHeight : CGFloat?
     
-    var points : [CGPoint] = []
-    
     
     
     override func didMove(to view: SKView) {
@@ -30,7 +28,7 @@ class LevelThree: SKScene {
         if let shipNode : Ship = self.childNode(withName: "shipNode") as? Ship {
             //make the declared variable equal to shipNode
             self.ship = shipNode
-            print(self.ship?.position)
+            print(self.ship?.parent)
         }
         //make sure the child actually is of the Mass class
         if let marsNode : Mass = self.childNode(withName: "marsNode") as? Mass {
@@ -43,21 +41,7 @@ class LevelThree: SKScene {
         //initialize non-default ship values
         self.ship?.mass = 0.000000000000000001
         self.ship?.id = 0
-        self.ship?.velocity.dx = ((G) * (self.mars?.mass)! / (self.ship?.position.y)!).squareRoot()
-        
-//        let pathToDraw:CGMutablePath = CGMutablePath()
-//        let myLine:SKShapeNode = SKShapeNode(path:pathToDraw)
-//
-//        let startPoint = CGPoint(x: 100, y: 100)
-//        let endPoint = CGPoint(x: 100, y: -100)
-//
-//        pathToDraw.move(to: startPoint)
-//        pathToDraw.addLine(to: endPoint)
-//
-//        myLine.path = pathToDraw
-//        myLine.strokeColor = SKColor.red
-        
-//        self.addChild(myLine)
+        self.ship?.velocity.dx = 0.9*((G) * (self.mars?.mass)! / (self.ship?.position.y)!).squareRoot()
         
         print("STARTING APP")
     }
@@ -67,20 +51,8 @@ class LevelThree: SKScene {
 //        self.ship?.isThrusting = true
         self.fingerPoint = pos
         
-        
-        
-        let path = CGMutablePath()
-        let myLine:SKShapeNode = SKShapeNode(path:path)
-//        path.move(to: points[0])
-        print(points)
-        path.addLines(between: points)
-//        path.closeSubpath()
-        
-        myLine.path = path
-        myLine.strokeColor = SKColor.white
-
-        self.addChild(myLine)
-//        print(self.points)
+        self.ship?.drawPath()
+    
     }
     
     //when you drag your finger on the screen
@@ -121,13 +93,6 @@ class LevelThree: SKScene {
         }
         self.ship?.travelVerlet(forTime: dt)
         self.mars?.travelVerlet(forTime: dt)
-        
-        self.points.append((self.ship?.position)!)
-        
-//        pathToDraw.addLine(to: (self.ship?.position)!)
-//
-//        myLine.path = pathToDraw
-//        myLine.strokeColor = SKColor.white
         
         Mass.handleCollisions(width: CGFloat(self.screenWidth!), height: CGFloat(self.screenHeight!))
     }

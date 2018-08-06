@@ -13,9 +13,12 @@ public class Ship: Mass {
     
     public var isThrusting : Bool = false
     
+    public var path : [CGPoint] = []
+    
     public override init(texture: SKTexture, id: Int) {
         super.init(texture: texture, id: id)
         self.isThrusting = false
+        print("parent",self.parent!)
     }
     
     public override init(imageName: String, id: Int) {
@@ -34,6 +37,21 @@ public class Ship: Mass {
         let shipDirection = GameScene.getThetaForVector(vector: self.velocity)
         let rotate = SKAction.rotate(toAngle: shipDirection, duration: TimeInterval(dt))
         self.run(rotate)
+    }
+    
+    public func drawPath() {
+        let path = CGMutablePath()
+        let myLine:SKShapeNode = SKShapeNode(path:path)
+        //        path.move(to: points[0])
+        //        print(points)
+        path.addLines(between: (self.path))
+        //        path.closeSubpath()
+        
+        myLine.path = path
+        myLine.strokeColor = SKColor.white
+        
+        self.parent?.addChild(myLine)
+        //        print(self.points)
     }
     
     public func thrust(forTime dt: CGFloat, towardPoint point: CGPoint) {
