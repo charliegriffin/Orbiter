@@ -62,6 +62,7 @@ public class SlingShot: SKShapeNode {
         //reset the slingshot data
         self.startPoint = CGPoint(x: 0, y: 0)
         self.vector = CGVector(dx: 0, dy: 0)
+        ship.path = []
     }
     
 }

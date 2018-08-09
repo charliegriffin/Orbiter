@@ -73,11 +73,19 @@ public class Mass: SKSpriteNode {
         let r2 = CGPoint(x: self.position.x + v_mid.dx * dt, y: self.position.y + v_mid.dy * dt)
         let a2 = calculateGravitationalAcceleration(position: r2)
         let v2 = CGVector(dx: v_mid.dx + a2.dx * dt/2, dy: v_mid.dy + a2.dy * dt/2)
+        
+        let prevPos = self.position
+        
         self.position = r2
         self.velocity = v2
         
         if(self.isKind(of: Ship.self)) {
             (self as! Ship).redrawOrientation(forTime: dt)
+            (self as! Ship).path.append(self.position)
+            if(prevPos.x < 0 && prevPos.y > 0 && self.position.x > 0 && self.position.y > 0){
+                // TODO: Improve this check
+                (self as! Ship).drawPath()
+            }
         }
     }
     
@@ -99,7 +107,7 @@ public class Mass: SKSpriteNode {
     static func handleCollisions(width: CGFloat, height: CGFloat) -> () {
         //boundary collisions
         for mass in masses {
-            self.handleBoundaryCollision(mass: mass, elasticity: 1, width: width, height: height)
+//            self.handleBoundaryCollision(mass: mass, elasticity: 1, width: width, height: height)
             //mass-mass collisions
             for otherMass in masses {
                 if(otherMass.id != mass.id) {
