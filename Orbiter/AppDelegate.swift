@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Orbiter
 //
-//  Created by Charles Griffin on 7/1/18.
-//  Copyright © 2018 Charles Griffin. All rights reserved.
+//  Created by Alex Sieber on 7/7/18.
+//  Copyright © 2018 Alex Sieber. All rights reserved.
 //
 
 import UIKit
