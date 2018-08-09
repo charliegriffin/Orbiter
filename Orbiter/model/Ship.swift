@@ -18,7 +18,6 @@ public class Ship: Mass {
     public override init(texture: SKTexture, id: Int) {
         super.init(texture: texture, id: id)
         self.isThrusting = false
-        print("parent",self.parent!)
     }
     
     public override init(imageName: String, id: Int) {
@@ -48,6 +47,7 @@ public class Ship: Mass {
         myLine.path = path
         myLine.strokeColor = SKColor.white
         
+        myLine.name = "pathNode"
         self.parent?.addChild(myLine)
     }
     

@@ -107,7 +107,7 @@ public class Mass: SKSpriteNode {
     static func handleCollisions(width: CGFloat, height: CGFloat) -> () {
         //boundary collisions
         for mass in masses {
-            self.handleBoundaryCollision(mass: mass, elasticity: 1, width: width, height: height)
+//            self.handleBoundaryCollision(mass: mass, elasticity: 1, width: width, height: height)
             //mass-mass collisions
             for otherMass in masses {
                 if(otherMass.id != mass.id) {
