@@ -46,6 +46,47 @@ class LevelThree: SKScene {
         self.ship?.id = 0
         self.ship?.velocity.dx = 0.9*((G) * (self.mars?.mass)! / (self.ship?.position.y)!).squareRoot()
         
+        //initalize scoring boundaries
+        var boundary : [CGPoint] = []
+        let innerRadius : Double = 300
+        boundary.append(CGPoint(x: 0.0,y: innerRadius))
+        boundary.append(CGPoint(x: innerRadius, y: 0.0))
+        boundary.append(CGPoint(x: 0.0,y: -innerRadius))
+        boundary.append(CGPoint(x: -innerRadius,y: 0.0))
+        boundary.append(CGPoint(x: 0.0,y: innerRadius))
+        
+        let path = CGMutablePath()
+        let myLine:SKShapeNode = SKShapeNode(path:path)
+        
+        path.addLines(between: (boundary))
+        
+        myLine.path = path
+        myLine.strokeColor = SKColor.white
+        
+        myLine.name = "boundaryNode"
+        self.addChild(myLine)
+        
+        self.slingShot = SlingShot()
+        
+        var outBoundary : [CGPoint] = []
+        let outerRadius : Double = 450
+        outBoundary.append(CGPoint(x: 0.0,y: outerRadius))
+        outBoundary.append(CGPoint(x: outerRadius, y: 0.0))
+        outBoundary.append(CGPoint(x: 0.0,y: -outerRadius))
+        outBoundary.append(CGPoint(x: -outerRadius,y: 0.0))
+        outBoundary.append(CGPoint(x: 0.0,y: outerRadius))
+        
+        let outPath = CGMutablePath()
+        let myOutLine:SKShapeNode = SKShapeNode(path:outPath)
+        
+        outPath.addLines(between: (outBoundary))
+        
+        myOutLine.path = outPath
+        myOutLine.strokeColor = SKColor.white
+        
+        myOutLine.name = "outBoundaryNode"
+        self.addChild(myOutLine)
+        
         self.slingShot = SlingShot()
         
         print("STARTING APP")
