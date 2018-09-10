@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 
+var outPath : CGMutablePath = CGMutablePath();
 class LevelThree: SKScene {
     
     private var ship : Ship?
@@ -76,7 +77,6 @@ class LevelThree: SKScene {
         outBoundary.append(CGPoint(x: -outerRadius,y: 0.0))
         outBoundary.append(CGPoint(x: 0.0,y: outerRadius))
         
-        let outPath = CGMutablePath()
         let myOutLine:SKShapeNode = SKShapeNode(path:outPath)
         
         outPath.addLines(between: (outBoundary))

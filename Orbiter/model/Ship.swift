@@ -46,6 +46,27 @@ public class Ship: Mass {
         
         myLine.path = path
         myLine.strokeColor = SKColor.white
+    
+        
+        
+        var pointsInBoundary = 0;
+        
+        for point in self.path {
+            print(point)
+            // TODO: Score between points between inner and outer boundary
+            if outPath.contains(point){
+                pointsInBoundary += 1;
+            } else {
+                // do nothing
+            }
+        }
+        
+        let score : Float = Float(pointsInBoundary)/Float(self.path.count)
+        print("points in boundary", pointsInBoundary)
+        print("total points", self.path.count)
+        print("score =", score);
+        // TODO: Display score on screen
+
         
         myLine.name = "pathNode"
         self.parent?.addChild(myLine)
