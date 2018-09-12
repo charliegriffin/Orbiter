@@ -10,6 +10,8 @@ import SpriteKit
 import GameplayKit
 
 var outPath : CGMutablePath = CGMutablePath();
+var inPath : CGMutablePath = CGMutablePath();
+
 class LevelThree: SKScene {
     
     private var ship : Ship?
@@ -21,6 +23,9 @@ class LevelThree: SKScene {
     private var slingShot : SlingShot?
     
     var hasStarted : Bool = false;
+    
+    
+    
     
     
     
@@ -49,19 +54,18 @@ class LevelThree: SKScene {
         
         //initalize scoring boundaries
         var boundary : [CGPoint] = []
-        let innerRadius : Double = 300
+        let innerRadius : Double = 400
         boundary.append(CGPoint(x: 0.0,y: innerRadius))
         boundary.append(CGPoint(x: innerRadius, y: 0.0))
         boundary.append(CGPoint(x: 0.0,y: -innerRadius))
         boundary.append(CGPoint(x: -innerRadius,y: 0.0))
         boundary.append(CGPoint(x: 0.0,y: innerRadius))
         
-        let path = CGMutablePath()
-        let myLine:SKShapeNode = SKShapeNode(path:path)
+        let myLine:SKShapeNode = SKShapeNode(path:inPath)
         
-        path.addLines(between: (boundary))
+        inPath.addLines(between: (boundary))
         
-        myLine.path = path
+        myLine.path = inPath
         myLine.strokeColor = SKColor.white
         
         myLine.name = "boundaryNode"
@@ -86,6 +90,17 @@ class LevelThree: SKScene {
         
         myOutLine.name = "outBoundaryNode"
         self.addChild(myOutLine)
+        
+        // Scoring stuff
+        let winner = SKLabelNode(fontNamed: "Chalkduster")
+        winner.text = "Score: \(0.0)"
+        winner.fontSize = 65
+        winner.fontColor = SKColor.white
+        // TODO: put label in proper spot
+        winner.position = CGPoint(x: frame.midX, y: frame.midY)
+        winner.name = "scoreLabel"
+        
+        addChild(winner)
         
         self.slingShot = SlingShot()
         

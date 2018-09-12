@@ -51,21 +51,18 @@ public class Ship: Mass {
         
         var pointsInBoundary = 0;
         
-        for point in self.path {
+        for point in self.path { // count points between boundaries
             print(point)
-            // TODO: Score between points between inner and outer boundary
-            if outPath.contains(point){
+            if !inPath.contains(point) && outPath.contains(point){
                 pointsInBoundary += 1;
-            } else {
-                // do nothing
             }
         }
         
         let score : Float = Float(pointsInBoundary)/Float(self.path.count)
-        print("points in boundary", pointsInBoundary)
-        print("total points", self.path.count)
-        print("score =", score);
-        // TODO: Display score on screen
+
+        if let unwrappedScoreLabel = self.parent!.childNode(withName: "scoreLabel") as? SKLabelNode {
+            unwrappedScoreLabel.text = "Score: \(score)"
+        }
 
         
         myLine.name = "pathNode"
