@@ -9,6 +9,9 @@
 import SpriteKit
 import GameplayKit
 
+var outPath : CGMutablePath = CGMutablePath();
+var inPath : CGMutablePath = CGMutablePath();
+
 class LevelThree: SKScene {
     
     private var ship : Ship?
@@ -20,6 +23,9 @@ class LevelThree: SKScene {
     private var slingShot : SlingShot?
     
     var hasStarted : Bool = false;
+    
+    
+    
     
     
     
@@ -45,6 +51,56 @@ class LevelThree: SKScene {
         self.ship?.mass = 0.000000000000000001
         self.ship?.id = 0
         self.ship?.velocity.dx = 0.9*((G) * (self.mars?.mass)! / (self.ship?.position.y)!).squareRoot()
+        
+        //initalize scoring boundaries
+        var boundary : [CGPoint] = []
+        let innerRadius : Double = 400
+        boundary.append(CGPoint(x: 0.0,y: innerRadius))
+        boundary.append(CGPoint(x: innerRadius, y: 0.0))
+        boundary.append(CGPoint(x: 0.0,y: -innerRadius))
+        boundary.append(CGPoint(x: -innerRadius,y: 0.0))
+        boundary.append(CGPoint(x: 0.0,y: innerRadius))
+        
+        let myLine:SKShapeNode = SKShapeNode(path:inPath)
+        
+        inPath.addLines(between: (boundary))
+        
+        myLine.path = inPath
+        myLine.strokeColor = SKColor.white
+        
+        myLine.name = "boundaryNode"
+        self.addChild(myLine)
+        
+        self.slingShot = SlingShot()
+        
+        var outBoundary : [CGPoint] = []
+        let outerRadius : Double = 450
+        outBoundary.append(CGPoint(x: 0.0,y: outerRadius))
+        outBoundary.append(CGPoint(x: outerRadius, y: 0.0))
+        outBoundary.append(CGPoint(x: 0.0,y: -outerRadius))
+        outBoundary.append(CGPoint(x: -outerRadius,y: 0.0))
+        outBoundary.append(CGPoint(x: 0.0,y: outerRadius))
+        
+        let myOutLine:SKShapeNode = SKShapeNode(path:outPath)
+        
+        outPath.addLines(between: (outBoundary))
+        
+        myOutLine.path = outPath
+        myOutLine.strokeColor = SKColor.white
+        
+        myOutLine.name = "outBoundaryNode"
+        self.addChild(myOutLine)
+        
+        // Scoring stuff
+        let winner = SKLabelNode(fontNamed: "Chalkduster")
+        winner.text = "Score: \(0)"
+        winner.fontSize = 25
+        winner.fontColor = SKColor.white
+        // TODO: put label in proper spot
+        winner.position = CGPoint(x: frame.maxX - 100, y: frame.maxY - 25)
+        winner.name = "scoreLabel"
+        
+        addChild(winner)
         
         self.slingShot = SlingShot()
         

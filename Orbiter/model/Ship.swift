@@ -46,6 +46,24 @@ public class Ship: Mass {
         
         myLine.path = path
         myLine.strokeColor = SKColor.white
+    
+        
+        
+        var pointsInBoundary = 0;
+        
+        for point in self.path { // count points between boundaries
+            print(point)
+            if !inPath.contains(point) && outPath.contains(point){
+                pointsInBoundary += 1;
+            }
+        }
+        
+        let score : Int = Int(Float(pointsInBoundary)/Float(self.path.count) * 100.0)
+
+        if let unwrappedScoreLabel = self.parent!.childNode(withName: "scoreLabel") as? SKLabelNode {
+            unwrappedScoreLabel.text = "Score: \(score)"
+        }
+
         
         myLine.name = "pathNode"
         self.parent?.addChild(myLine)
