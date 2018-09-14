@@ -93,11 +93,11 @@ class LevelThree: SKScene {
         
         // Scoring stuff
         let winner = SKLabelNode(fontNamed: "Chalkduster")
-        winner.text = "Score: \(0.0)"
-        winner.fontSize = 65
+        winner.text = "Score: \(0)"
+        winner.fontSize = 25
         winner.fontColor = SKColor.white
         // TODO: put label in proper spot
-        winner.position = CGPoint(x: frame.midX, y: frame.midY)
+        winner.position = CGPoint(x: frame.maxX - 100, y: frame.maxY - 25)
         winner.name = "scoreLabel"
         
         addChild(winner)

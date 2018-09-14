@@ -58,7 +58,7 @@ public class Ship: Mass {
             }
         }
         
-        let score : Float = Float(pointsInBoundary)/Float(self.path.count)
+        let score : Int = Int(Float(pointsInBoundary)/Float(self.path.count) * 100.0)
 
         if let unwrappedScoreLabel = self.parent!.childNode(withName: "scoreLabel") as? SKLabelNode {
             unwrappedScoreLabel.text = "Score: \(score)"
